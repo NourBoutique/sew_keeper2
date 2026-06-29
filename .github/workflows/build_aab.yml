@@ -1,0 +1,61 @@
+name: Build AAB
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # تقدر تشغله يدوي من GitHub
+
+jobs:
+  build:
+    name: Build Release AAB
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. نزّل الكود
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. ثبّت Java
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      # 3. ثبّت Flutter
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.32.2"
+          channel: "stable"
+
+      # 4. نزّل الـ dependencies
+      - name: Install dependencies
+        run: flutter pub get
+
+      # 5. فك تشفير الـ Keystore من الـ Secrets
+      - name: Decode Keystore
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/upload-keystore.jks
+
+      # 6. إنشاء key.properties
+      - name: Create key.properties
+        run: |
+          cat > android/key.properties <<EOF
+          storePassword=${{ secrets.STORE_PASSWORD }}
+          keyPassword=${{ secrets.KEY_PASSWORD }}
+          keyAlias=${{ secrets.KEY_ALIAS }}
+          storeFile=upload-keystore.jks
+          EOF
+
+      # 7. بناء الـ AAB
+      - name: Build AAB
+        run: flutter build appbundle --release
+
+      # 8. رفع الـ AAB كـ Artifact
+      - name: Upload AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release
+          path: build/app/outputs/bundle/release/app-release.aab

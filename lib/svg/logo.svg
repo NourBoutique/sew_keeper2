@@ -1,0 +1,60 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+
+    <defs>
+        <clipPath id="roundclip">
+            <rect x="0" y="0" width="512" height="512" rx="114"/>
+        </clipPath>
+    </defs>
+
+    <!-- Background -->
+    <rect x="0" y="0" width="512" height="512" rx="114" fill="#6c63ff"/>
+
+    <!-- Soft inner circle -->
+    <circle cx="256" cy="256" r="190" fill="#7b73ff" opacity="0.35"
+        clip-path="url(#roundclip)"/>
+
+    <!-- BG circle top right -->
+    <circle cx="440" cy="80" r="130" fill="#7b73ff" opacity="0.25"
+        clip-path="url(#roundclip)"/>
+
+    <!-- BG circle bottom left -->
+    <circle cx="80" cy="430" r="100" fill="#5a52e0" opacity="0.3"
+        clip-path="url(#roundclip)"/>
+
+    <!-- Needle body -->
+    <rect x="242" y="100" width="28" height="180" rx="14" fill="#ffffff" opacity="0.97"/>
+
+    <!-- Needle top dome -->
+    <circle cx="256" cy="100" r="14" fill="#ffffff"/>
+
+    <!-- Needle eye -->
+    <ellipse cx="256" cy="138" rx="8" ry="12" fill="#6c63ff"/>
+
+    <!-- Thread loop -->
+    <path d="M256 280
+           Q210 305 200 270
+           Q190 235 215 210
+           Q240 188 270 205
+           Q302 222 295 258
+           Q288 292 258 290
+           Q232 288 228 310
+           Q224 330 218 350"
+        fill="none"
+        stroke="#ffffff"
+        stroke-width="12"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        opacity="0.92"/>
+
+    <!-- Knot dot -->
+    <circle cx="218" cy="352" r="12" fill="#ffffff" opacity="0.8"/>
+
+    <!-- Stitch marks -->
+    <line x1="310" y1="300" x2="345" y2="308" stroke="#fff" stroke-width="8"
+        stroke-linecap="round" opacity="0.35"/>
+    <line x1="316" y1="325" x2="351" y2="333" stroke="#fff" stroke-width="8"
+        stroke-linecap="round" opacity="0.25"/>
+    <line x1="322" y1="350" x2="357" y2="358" stroke="#fff" stroke-width="8"
+        stroke-linecap="round" opacity="0.15"/>
+
+</svg>
