@@ -3,7 +3,7 @@ name: Build AAB
 on:
   push:
     branches:
-      - main
+      - master
   workflow_dispatch: # تقدر تشغله يدوي من GitHub
 
 jobs:
